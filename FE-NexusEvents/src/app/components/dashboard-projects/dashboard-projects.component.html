@@ -1,0 +1,30 @@
+<div class="container-titulo">
+    <h1 class="titulo">NUESTRAS ESPECIALIDADES</h1>
+</div>
+<div class="container">
+    @for (item of eventsType; track item.id) {
+        @if (item.id % 2 !== 0) {
+            <div class="container-description">
+                <h2 class="event-name">{{item.name | uppercase}}</h2>
+                <div class="elementor-divider">
+                    <div class="elementor-divider-separator">
+                        <div class="elementor-divider-separator-diamond"></div>
+                    </div>
+                </div>
+                <div class="description">{{item.description}}</div>
+            </div>
+            <div class="image-project" [ngStyle]="{ 'background-image': item.imageProjects}"></div>
+        }@else {
+            <div class="image-project" [ngStyle]="{ 'background-image': item.imageProjects}"></div>
+            <div class="container-description">
+                <h2 class="event-name">{{item.name | uppercase}}</h2>
+                <div class="elementor-divider">
+                    <div class="elementor-divider-separator">
+                        <div class="elementor-divider-separator-circle"></div>
+                    </div>
+                </div>
+                <div class="description">{{item.description}}</div>
+            </div>
+        }
+    }
+</div>

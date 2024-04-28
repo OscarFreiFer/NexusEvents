@@ -1,0 +1,99 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.name {
+    font-style: italic;
+    font-weight: 600;
+    letter-spacing: 0.75rem;
+}
+
+.card {
+    width: 22rem;
+    height: 22rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    perspective: 2500px;
+}
+
+.wrapper {
+    transition: all 0.5s;
+    position: absolute;
+    top: 2rem;
+    z-index: -1;
+    height: 22rem;
+    width: 22rem;
+    border: 1px solid black;
+    border-radius: 50%;
+}
+
+.card:hover .wrapper {
+    transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+    box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.527);
+    cursor: pointer;
+}
+
+.wrapper::before,
+.wrapper::after {
+    content: "";
+    opacity: 0;
+    width: 100%;
+    height: 80px;
+    transition: all 0.5s;
+    position: absolute;
+    left: 0;
+}
+
+.wrapper::before {
+    border-radius: 50%;
+    top: 0;
+    height: 100%;
+    background-image: linear-gradient(
+        to top,
+        transparent 56%,
+        rgba(12, 13, 19, 0.356) 68%,
+        rgba(12, 13, 19, 0.671) 97%
+    );
+}
+.wrapper::after {
+    bottom: 0;
+    opacity: 1;
+    border-radius: 50%;
+    background-image: linear-gradient(
+        to bottom,
+        transparent 46%,
+        rgba(12, 13, 19, 0.336) 68%,
+        rgba(12, 13, 19, 0.712) 97%
+    );
+}
+
+.card:hover .wrapper::before,
+.wrapper::after {
+    opacity: 1;
+}
+.card:hover .wrapper::after {
+    height: 100px;
+}
+
+.my-icon {
+    opacity: 0;
+    transition: all 0.5s;
+    position: absolute;
+    z-index: -1;
+    cursor: pointer;
+
+    color: var(--secondary-color);
+    font-size: 100px;
+    height: 100px;
+    width: 100px;
+    filter: drop-shadow(10px 20px 4px rgba(12, 13, 19, 0.685));
+}
+.card:hover .my-icon {
+    opacity: 1;
+    transform: translate3d(0%, -60%, 100px);
+}

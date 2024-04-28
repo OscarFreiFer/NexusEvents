@@ -1,0 +1,34 @@
+<div class="slider-content">
+    <div class="container">
+        <div class="logo"></div>
+        <h1 class="slider-title">
+            <span class="title">{{title | uppercase}}</span><br />
+            <span class="sub">TU AGENCIA ESPECIALIZADA EN EVENTOS</span><br />
+            <span class="word sub"></span>
+        </h1>
+    </div>
+    <ul class="slider">
+        <li class="slider-image" [ngStyle]="{ 'background-image': 'url(../assets/imagenes-cabecera/audi-e-tron.jpeg)'}"></li>
+        <li class="slider-image" [ngStyle]="{ 'background-image': 'url(../assets/imagenes-cabecera/elmarcorojo423.png)'}"></li>
+        <li class="slider-image" [ngStyle]="{ 'background-image': 'url(../assets/imagenes-cabecera/img-eventos-1.jpg)'}"></li>
+        <li class="slider-image" [ngStyle]="{ 'background-image': 'url(../assets/imagenes-cabecera/img-eventos-3.jpg)'}"></li>
+    </ul>
+</div>
+
+<div class="elementor_container">
+    <section class="elementor_section">
+        <div class="elementor_slogan">
+            <div class="subtitle_slogan">En nexus events</div>
+            <h2 class="title_slogan">Somos diferentes</h2>
+        </div>
+        <div class="elementor-divider">
+            <div class="elementor-divider-separator">
+                <div class="elementor-divider-separator-circle"></div>
+            </div>
+        </div>
+        <div class="cards-container">
+            <app-card-element class="elementor-cards" [eventsType]="eventsTpye"/>
+        </div>
+    </section>
+</div>
+<app-dashboard-projects [eventsType]="eventsTpye"/>

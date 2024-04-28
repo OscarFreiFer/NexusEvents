@@ -1,0 +1,56 @@
+.container-titulo {
+    display: flex;
+    justify-content: center;  
+    margin: 7rem 0; 
+}
+
+.titulo {
+    font-size: 6rem;
+    font-weight: 900;
+    letter-spacing: 0.5rem;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: repeat(3, 50rem);
+    align-items: center;
+    padding-bottom: 20rem;
+}
+
+.container-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.event-name {
+    font-size: xx-large;
+}
+
+.description {
+    font-size: 1.6rem;
+    font-style: italic;
+    padding: 5rem;
+    text-align: center;
+    color: var(--subletter-color)
+}
+
+.image-project {
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+@media (max-width: 600px) {
+    .container {
+        grid-template-columns: 100%;
+        grid-template-rows: repeat(6, 50rem);
+    }
+}
+

@@ -1,10 +1,95 @@
+:root {
+    --primary-color: #071b2b;
+    --secondary-color: #ea6b23;
+    --thirdary-color: #c7c2bf;
+    --subletter-color: #7a7a7a;
+}
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-html{
+html {
     font-size: 62.5%;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Helvetica, Arial, sans-serif, sans-serif;
+}
+@media only screen and (max-width: 75em) {
+    html {
+        font-size: 56.25%;
+    }
+}
+@media only screen and (max-width: 56.25em) {
+    html {
+        font-size: 40%;
+    }
+}
+@media only screen and (min-width: 112.5em) {
+    html {
+        font-size: 75%;
+    }
 }
 
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.elementor-divider {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.elementor-divider-separator {
+    width: 45%;
+    height: 3rem;
+    position: relative;
+}
+
+.elementor-divider-separator::after,
+.elementor-divider-separator::before {
+    content: "";
+    position: absolute;
+    margin: auto;
+    height: 0.1rem;
+    background-color: #a5a5a5;
+    width: 45%;
+    top: 50%;
+}
+
+.elementor-divider-separator::after {
+    right: 0;
+}
+
+.elementor-divider-separator::before {
+    left: 0;
+}
+
+.elementor-divider-separator-circle {
+    height: 100%;
+    width: 3rem;
+    border: 0.1rem solid #a5a5a5;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.elementor-divider-separator-diamond {
+    height: 2rem;
+    width: 2rem;
+    border: 0.1rem solid #a5a5a5;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    transform: rotate(45deg) translate(20%, 20%);
+}
