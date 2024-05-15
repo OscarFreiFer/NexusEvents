@@ -30,6 +30,8 @@
     width: 22rem;
     border: 1px solid black;
     border-radius: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .card:hover .wrapper {

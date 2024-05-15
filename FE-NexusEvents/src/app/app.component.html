@@ -1,4 +1,7 @@
-
-<app-header title="{{title | uppercase}}"/>
-<router-outlet />
-<app-footer />
+<div class="main-container">
+    <app-header title="{{title | uppercase}}"/>
+    <router-outlet />
+    @if (!isLoginPage()) {
+        <app-footer />
+    }
+</div>

@@ -11,8 +11,6 @@
     width: 20rem;
     height: 20rem;
     z-index: 9999;
-    position: relative;
-    left: -1.8rem;
 }
 
 .slider-content {

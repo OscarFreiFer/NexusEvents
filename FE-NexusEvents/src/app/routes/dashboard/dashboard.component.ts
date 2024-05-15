@@ -7,19 +7,20 @@ import { FooterComponent } from '../../components/footer/footer.component';
 import { Events, events } from '../../interfaces/events';
 
 @Component({
-  selector: 'app-home-screen',
-  standalone: true,
-  imports: [HeaderComponent,
-    CardElementComponent,
-    DashboardProjectsComponent,
-    UpperCasePipe,
-    FooterComponent,
-    NgStyle,
-  ],
-  templateUrl: './home-screen.component.html',
-  styleUrl: './home-screen.component.css'
+    selector: 'app-dashboard',
+    standalone: true,
+    imports: [
+        HeaderComponent,
+        CardElementComponent,
+        DashboardProjectsComponent,
+        UpperCasePipe,
+        FooterComponent,
+        NgStyle,
+    ],
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.css',
 })
-export class HomeScreenComponent {
-  title: string = 'Nexus Events';
-  eventsTpye: Events[] = events;
+export class DashboardComponent {
+    title: string = 'Nexus Events';
+    eventsTpye: Events[] = events;
 }

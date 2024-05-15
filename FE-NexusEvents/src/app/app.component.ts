@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { NgStyle, UpperCasePipe } from '@angular/common';
 import { FooterComponent } from './components/footer/footer.component';
@@ -19,4 +19,10 @@ import { FooterComponent } from './components/footer/footer.component';
 })
 export class AppComponent {
     title: string = 'Nexus Events';
+
+    constructor(private router: Router){}
+
+    isLoginPage() : boolean {
+        return this.router.url === '/login';
+    }
 }
