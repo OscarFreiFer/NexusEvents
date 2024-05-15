@@ -1,0 +1,6 @@
+@BE_NexusEvents_HostAddress = http://localhost:5150
+
+GET {{BE_NexusEvents_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BE-NexusEvents", "BE-NexusEvents\BE-NexusEvents.csproj", "{06F8AB33-B8F2-4CAE-A1E8-341E3A51C71B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06F8AB33-B8F2-4CAE-A1E8-341E3A51C71B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06F8AB33-B8F2-4CAE-A1E8-341E3A51C71B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06F8AB33-B8F2-4CAE-A1E8-341E3A51C71B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06F8AB33-B8F2-4CAE-A1E8-341E3A51C71B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F014CC01-217F-4361-897D-9C7F2B96A469}
+	EndGlobalSection
+EndGlobal
