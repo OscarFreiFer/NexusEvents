@@ -24,8 +24,8 @@ namespace BE_NexusEvents.Controllers
         }
 
         // POST: api/Users/login
-        [HttpGet("login")]
-        public async Task<ActionResult<User>> Login(User user)
+        [HttpPost("login")]
+        public async Task<ActionResult<User>> Login(LoginDTO user)
         {
             var userInDb = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
 

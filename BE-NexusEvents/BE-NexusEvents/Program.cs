@@ -3,9 +3,34 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Cargar variables de entorno desde un archivo .env
+DotNetEnv.Env.Load();
+
 // Add services to the container.
 // Crear variable para la cadena de conexión
 var connectionString = builder.Configuration.GetConnectionString("Connection");
+
+Console.WriteLine($"SERVERNAME: {Environment.GetEnvironmentVariable("SERVERNAME")}");
+Console.WriteLine($"USER: {Environment.GetEnvironmentVariable("USER")}");
+Console.WriteLine($"PASSWORD: {Environment.GetEnvironmentVariable("PASSWORD")}");
+Console.WriteLine($"TRUSTED_WINDOWS: {Environment.GetEnvironmentVariable("TRUSTED_WINDOWS")}");
+
+var serverName = Environment.GetEnvironmentVariable("SERVERNAME");
+var user = Environment.GetEnvironmentVariable("USER");
+var password = Environment.GetEnvironmentVariable("PASSWORD");
+var trustedWindows = Environment.GetEnvironmentVariable("TRUSTED_WINDOWS");
+
+if (!string.IsNullOrEmpty(serverName) && 
+    !string.IsNullOrEmpty(user) && 
+    !string.IsNullOrEmpty(password) && 
+    !string.IsNullOrEmpty(trustedWindows))
+{
+    connectionString = connectionString.Replace("${SERVERNAME}", serverName)
+                                       .Replace("${USER}", user)
+                                       .Replace("${PASSWORD}", password)
+                                       .Replace("${TRUSTED_WINDOWS}", trustedWindows);
+}
+
 //Registrar servicio para la conexión con inyección de dependencias
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlServer(connectionString)
