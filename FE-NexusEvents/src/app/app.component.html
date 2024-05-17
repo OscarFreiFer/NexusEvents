@@ -1,7 +1,7 @@
 <div class="main-container">
     <app-header title="{{title | uppercase}}"/>
     <router-outlet />
-    @if (!isLoginPage()) {
+    @if (!isLoginRegisterPage()) {
         <app-footer />
     }
 </div>

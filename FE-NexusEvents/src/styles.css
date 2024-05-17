@@ -1,7 +1,8 @@
 :root {
     --primary-color: #071b2b;
     --secondary-color: #ea6b23;
-    --thirdary-color: #c7c2bf;
+    --thirdary-color: #446e8b;
+    --fourth-color: #c7c2bf;
     --subletter-color: #7a7a7a;
 }
 * {
@@ -39,6 +40,7 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+/* Divisor de apartados */
 .elementor-divider {
     width: 100%;
     display: flex;
@@ -92,4 +94,149 @@ body {
     bottom: 0;
     margin: auto;
     transform: rotate(45deg) translate(20%, 20%);
+}
+
+
+/* Formulario Login y Register */
+
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: rgb(255, 255, 255);        
+    border-radius: 1rem;
+    border: 1px solid rgb(130, 130, 130);
+    box-shadow: 2px 2px 2px 0px rgb(163, 163, 163);
+}
+
+.center h1 {
+    text-align: center;
+    padding: 2rem 0 2rem 0;
+    font-size: 2.5rem;
+}
+
+.center form {
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+form .text-field{
+    position: relative;
+    margin: 3rem 0
+}
+
+.text-field input {
+    width: 100%;
+    padding: 0 .5rem;
+    height: 40px;
+    font-size: 1.6rem;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.text-field label {
+    position: absolute;
+    top: 50%;
+    left: .5rem;
+    transform: translateY(-50%);
+    color: rgb(173, 173, 173);
+    font-size: 1.6rem;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.text-field label.fieldError {
+    color: #f23a3aba;
+}
+
+.text-field span {
+    display: block;
+    border-top: 1px solid rgb(173, 173, 173);
+}
+
+.text-field span::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: rgb(38, 145, 217);
+    transition: .5s;
+}
+
+.text-field span.fieldError::before {
+    width: 100%;
+    background: #d92626;
+}
+
+.text-field input:focus ~ label,
+.text-field input:valid ~ label{
+    top: -.5rem;
+    color: #2691d9;
+}
+
+.text-field input:focus ~ label.fieldError,
+.text-field input:valid ~ label.fieldError{
+    color: #d92626;
+}
+
+.text-field input:focus ~ span::before,
+.text-field input:valid ~ span::before {
+    width: 100%;
+}
+
+.errorMsg {
+    color: #d92626;
+    margin-bottom: 1.5rem;
+}
+
+.pass {
+    font-size: 1rem;
+    margin: -.5rem 0 20px 5px;
+    color: rgb(166, 166, 166);
+    cursor: pointer;
+}
+
+.pass:hover {
+    text-decoration: underline;
+    color: rgb(38, 145, 217);
+}
+
+input[type="submit"] {
+    width: 100%;
+    height: 5rem;
+    border: 1px solid;
+    background: var(--thirdary-color);
+    border-radius: .5rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: rgb(233, 244, 251);
+    cursor: pointer;
+    outline: none;
+    transition: .5s ease;
+    margin-bottom: 3rem;
+}
+
+input[type="submit"]:hover {
+    transition: .5s ease;
+    transform: translateY(-1rem);
+}
+
+.singup_link {
+    margin: 3rem 0;
+    text-align: center;
+    font-size: 1.4rem;
+    color: rgb(102, 102, 102);
+}
+
+.singup_link a {
+    color: rgb(38, 145, 217);
+    text-decoration: none;
+    }
+
+.singup_link a:hover {
+    text-decoration: underline;
 }

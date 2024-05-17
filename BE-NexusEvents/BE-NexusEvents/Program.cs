@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 DotNetEnv.Env.Load();
 
 // Add services to the container.
-// Crear variable para la cadena de conexión
+// Crear variable para la cadena de conexiï¿½n
 var connectionString = builder.Configuration.GetConnectionString("Connection");
 
 Console.WriteLine($"SERVERNAME: {Environment.GetEnvironmentVariable("SERVERNAME")}");
@@ -21,8 +21,6 @@ var password = Environment.GetEnvironmentVariable("PASSWORD");
 var trustedWindows = Environment.GetEnvironmentVariable("TRUSTED_WINDOWS");
 
 if (!string.IsNullOrEmpty(serverName) && 
-    !string.IsNullOrEmpty(user) && 
-    !string.IsNullOrEmpty(password) && 
     !string.IsNullOrEmpty(trustedWindows))
 {
     connectionString = connectionString.Replace("${SERVERNAME}", serverName)
@@ -31,7 +29,7 @@ if (!string.IsNullOrEmpty(serverName) &&
                                        .Replace("${TRUSTED_WINDOWS}", trustedWindows);
 }
 
-//Registrar servicio para la conexión con inyección de dependencias
+//Registrar servicio para la conexiï¿½n con inyecciï¿½n de dependencias
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlServer(connectionString)
 );

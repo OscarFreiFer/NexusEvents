@@ -22,7 +22,7 @@ export class AppComponent {
 
     constructor(private router: Router){}
 
-    isLoginPage() : boolean {
-        return this.router.url === '/login';
+    isLoginRegisterPage() : boolean {
+        return this.router.url === '/login' || this.router.url === '/register';
     }
 }

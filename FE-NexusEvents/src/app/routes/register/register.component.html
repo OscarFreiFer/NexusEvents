@@ -1,0 +1,56 @@
+<div class="center">
+    <h1>Register</h1>
+    <form [formGroup]="registerForm" (ngSubmit)="enviar()">
+        <div class="text-field">
+            <input
+                type="text"
+                name="nombre"
+                required
+                formControlName="nombre"
+            />
+            <span
+                [ngClass]="{'fieldError': hasErrors('nombre', 'required')}"
+            ></span>
+            <label
+                [ngClass]="{'fieldError': hasErrors('nombre', 'required')}"
+                >Nombre*</label
+            >
+        </div>
+        <div class="text-field">
+            <input type="text" name="email" required formControlName="email" />
+            <span
+                [ngClass]="{'fieldError': hasErrors('email', 'required') || hasErrors('email', 'email') }"
+            ></span>
+            <label
+                [ngClass]="{'fieldError': hasErrors('email', 'required') || hasErrors('email', 'email') }"
+                >Email*</label
+            >
+        </div>
+        <div class="text-field">
+            <input
+                type="password"
+                name="passwd"
+                required
+                formControlName="passwd"
+            />
+            <span [ngClass]="{'fieldError': hasErrors('passwd', 'required') || hasErrors('passwd', 'minlength') }"></span>
+            <label [ngClass]="{'fieldError': hasErrors('passwd', 'required') || hasErrors('passwd', 'minlength') }">Password*</label>
+        </div>
+        <div class="text-field">
+            <input
+                type="password"
+                name="repeatPasswd"
+                required
+                formControlName="repeatPasswd"
+            />
+            <span [ngClass]="{'fieldError': hasErrors('passwd', 'required') || hasErrors('passwd', 'minlength') ||registerForm.getError('passwordMismatch')}"></span>
+            <label [ngClass]="{'fieldError': hasErrors('passwd', 'required') || hasErrors('passwd', 'minlength') || registerForm.getError('passwordMismatch')}">Repeat Password*</label>
+        </div>
+        @if (hasErrors('nombre', 'required') || hasErrors('email', 'required') || hasErrors('passwd', 'required') ) {
+            <div class="errorMsg">
+                Los campos con * son requeridos
+            </div>
+        }
+        <input type="submit" value="Sign up" />
+    </form>
+</div>
