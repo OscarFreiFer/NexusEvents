@@ -40,6 +40,15 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.logo {
+    background-image: url('./assets/imagenes-cabecera/logo-bg.png');
+    height: 80px;
+    width: 80px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+
 /* Divisor de apartados */
 .elementor-divider {
     width: 100%;
@@ -179,6 +188,11 @@ form .text-field{
 }
 
 .text-field input:focus ~ label.fieldError,
+.text-field input:valid ~ label.fieldError{
+    color: #d92626;
+}
+
+.text-field input.fieldError,
 .text-field input:valid ~ label.fieldError{
     color: #d92626;
 }

@@ -46,3 +46,4 @@ Thumbs.db
 **/bin/
 **/obj/
 .env
+.envexample

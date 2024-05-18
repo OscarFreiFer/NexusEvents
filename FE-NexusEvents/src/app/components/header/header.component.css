@@ -15,11 +15,3 @@
     width: 0px;
 }
 
-.logo {
-    background-image: url('../../../assets/imagenes-cabecera/logo-bg.png');
-    height: 80px;
-    width: 80px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    cursor: pointer;
-}

@@ -10,11 +10,6 @@ DotNetEnv.Env.Load();
 // Crear variable para la cadena de conexi�n
 var connectionString = builder.Configuration.GetConnectionString("Connection");
 
-Console.WriteLine($"SERVERNAME: {Environment.GetEnvironmentVariable("SERVERNAME")}");
-Console.WriteLine($"USER: {Environment.GetEnvironmentVariable("USER")}");
-Console.WriteLine($"PASSWORD: {Environment.GetEnvironmentVariable("PASSWORD")}");
-Console.WriteLine($"TRUSTED_WINDOWS: {Environment.GetEnvironmentVariable("TRUSTED_WINDOWS")}");
-
 var serverName = Environment.GetEnvironmentVariable("SERVERNAME");
 var user = Environment.GetEnvironmentVariable("USER");
 var password = Environment.GetEnvironmentVariable("PASSWORD");
@@ -34,6 +29,13 @@ builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlServer(connectionString)
 );
 
+
+//Cors para correcto funcionamiento en local
+builder.Services.AddCors(options => options.AddPolicy("AllowWebapp",
+                                    builder => builder.AllowAnyOrigin()
+                                                      .AllowAnyHeader()
+                                                      .AllowAnyMethod()));
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -47,6 +49,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowWebapp");
 
 app.UseHttpsRedirection();
 
