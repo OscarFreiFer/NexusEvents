@@ -10,6 +10,7 @@ namespace BE_NexusEvents.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string Ubication { get; set; }
+        public string Address { get; set; }
         public int MaxCapacity { get; set; }
 
         [DataType(DataType.ImageUrl)]
