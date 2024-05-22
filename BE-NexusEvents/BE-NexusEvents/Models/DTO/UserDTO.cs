@@ -10,13 +10,16 @@ namespace BE_NexusEvents.Models.DTO
         public string Name { get; set; }
 
         [Required]
-        [DataType(DataType.Password)]
-        [MinLength(6)]
-        public string Password { get; set; }
-
-        [Required]
         [DataType(DataType.EmailAddress)]
         [EmailAddress(ErrorMessage = "Correo electrónico inválido.")]
         public string Email { get; set; }
+    }
+
+    public class UserEntity : UserDTO
+    {
+        [Required]
+        [DataType(DataType.Password)]
+        [MinLength(6)]
+        public string? Password { get; set; }
     }
 }

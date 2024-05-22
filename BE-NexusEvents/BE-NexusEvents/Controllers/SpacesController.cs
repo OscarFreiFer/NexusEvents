@@ -21,11 +21,11 @@ namespace BE_NexusEvents.Controllers
             _context = context;
         }
 
-        // GET: api/Spaces
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Space>>> GetSpaces()
+        // GET: api/Spaces/spaceType
+        [HttpGet("bySpaceType/{spaceType}")]
+        public async Task<ActionResult<IEnumerable<Space>>> GetSpaces(int spaceType)
         {
-            return await _context.Spaces.ToListAsync();
+            return await _context.Spaces.Where(s => s.SpaceType == spaceType).ToListAsync();
         }
 
         // GET: api/Spaces/5

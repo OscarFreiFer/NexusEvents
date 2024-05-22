@@ -1,6 +1,20 @@
-.logo-login{
+.logo-login {
     display: block;
     margin: auto;
     height: 100px !important;
     width: 100px !important;
+}
+
+.btn {
+    background-color: var(--thirdary-color) !important;
+    color: white !important;
+    width: 100%;
+    height: 5rem;
+    font-size: 1.8rem;
+    transition: .5s ease;
+}
+
+.btn:hover {
+    transition: .5s ease;
+    transform: translateY(-1rem);
 }

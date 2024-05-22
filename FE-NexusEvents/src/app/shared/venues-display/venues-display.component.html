@@ -1,0 +1,123 @@
+@if (!isLoading) { @for (item of paginatedVenues; track $index) {
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-toolbar class="toolbar">
+            <div class="header-content">
+                <img
+                    mat-card-avatar
+                    [src]="item.imageUrl"
+                    (error)="onImageError($event)"
+                    class="imgCard"
+                />
+                <div>
+                    <mat-card-title>{{ item.name }}</mat-card-title>
+                    <mat-card-subtitle>{{ item.ubication }}</mat-card-subtitle>
+                    <mat-card-subtitle>{{ item.address }}</mat-card-subtitle>
+
+                    <mat-card-subtitle style="margin-top: 2rem"
+                        >Aforo máximo: {{ item.maxCapacity }}</mat-card-subtitle
+                    >
+                </div>
+            </div>
+            <span class="spacer"></span>
+            <button
+                mat-raised-button
+                class="btn"
+                mat-button
+                (click)="panel.toggle()"
+            >
+                Crea tu evento aquí
+            </button>
+        </mat-toolbar>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-expansion-panel #panel>
+            <!-- Formulario de prueba -->
+            <mat-stepper
+                class="example-stepper"
+                [orientation]="(stepperOrientation | async)!"
+            >
+                <mat-step
+                    [stepControl]="firstFormGroup"
+                    label="Ponga nombre al evento"
+                >
+                    <form [formGroup]="firstFormGroup">
+                        <mat-form-field>
+                            <mat-label>Nombre</mat-label>
+                            <input
+                                matInput
+                                placeholder="Nombre evento"
+                                formControlName="firstCtrl"
+                                required
+                            />
+                        </mat-form-field>
+                        <div>
+                            <button mat-button matStepperNext>Siguiente</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step
+                    [stepControl]="secondFormGroup"
+                    label="Seleccione fecha para el evento"
+                >
+                    <form [formGroup]="secondFormGroup">
+                        <mat-form-field>
+                            <mat-label>Fecha</mat-label>
+                            <input
+                                matInput
+                                formControlName="secondCtrl"
+                                placeholder=""
+                                required
+                            />
+                        </mat-form-field>
+                        <div>
+                            <button mat-button matStepperPrevious>Atrás</button>
+                            <button mat-button matStepperNext>Siguiente</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step
+                    [stepControl]="thirdFormGroup"
+                    label="Agregue una descripción"
+                >
+                    <form [formGroup]="thirdFormGroup">
+                        <mat-form-field>
+                            <mat-label>Agregue descripción</mat-label>
+                            <textarea
+                                matInput
+                                formControlName="thirdCtrl"
+                                placeholder="Descripción del evento"
+                                required
+                            ></textarea>
+                        </mat-form-field>
+                        <div>
+                            <button mat-button matStepperPrevious>Atrás</button>
+                            <button mat-button matStepperNext>Siguiente</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Crear</ng-template>
+                    <p>Ya has terminado.</p>
+                    <p>Confirma la creación.</p>
+                    <div>
+                        <button mat-button matStepperPrevious>Finalizar</button>
+                    </div>
+                </mat-step>
+            </mat-stepper>
+            <!-- Aquí acaba el formulario -->
+        </mat-expansion-panel>
+    </mat-card-content>
+</mat-card>
+
+}
+<mat-paginator
+    [length]="venues.length"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 7, 10, 15]"
+    (page)="onPageChange($event)"
+>
+</mat-paginator>
+} @else {
+<mat-spinner style="margin: auto"></mat-spinner>
+}

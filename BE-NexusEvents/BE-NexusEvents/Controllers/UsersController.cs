@@ -61,15 +61,15 @@ namespace BE_NexusEvents.Controllers
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("register")]
-        public async Task<ActionResult<UserDTO>> PostUser(UserDTO userDto)
+        public async Task<ActionResult<UserDTO>> PostUser(UserEntity userEntity)
         {
-            userDto.Password = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
+            userEntity.Password = BCrypt.Net.BCrypt.HashPassword(userEntity.Password);
 
             var user = new User
             {
-                Name = userDto.Name,
-                Email = userDto.Email,
-                Password = userDto.Password,
+                Name = userEntity.Name,
+                Email = userEntity.Email,
+                Password = userEntity.Password,
                 CreatedDate = DateTime.UtcNow
             };
             // Encrypt password
@@ -77,7 +77,7 @@ namespace BE_NexusEvents.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = userDto.Id }, userDto);
+            return CreatedAtAction("GetUser", new { id = userEntity.Id }, userEntity);
         }
 
         // PUT: api/Users/5

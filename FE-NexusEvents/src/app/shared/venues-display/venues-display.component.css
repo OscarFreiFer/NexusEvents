@@ -1,0 +1,81 @@
+.example-card {
+    margin: 20px auto;
+}
+
+mat-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 2rem;
+}
+
+.mat-toolbar-single-row {
+    height: auto;
+    white-space: wrap;
+}
+
+button {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+mat-expansion-panel {
+    width: 100%;
+}
+
+mat-toolbar {
+    background-color: white;
+}
+
+.example-card .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    gap: 2rem;
+}
+
+.header-content {
+    gap: 2rem;
+}
+
+.example-card .header-content {
+    display: flex;
+    align-items: center;
+}
+
+.example-card .spacer {
+    flex: 1;
+}
+
+.example-card .mat-card-avatar {
+    margin-right: 16px;
+}
+
+.example-card button {
+    margin-right: 0; /* Optional: adjust the margin if necessary */
+}
+
+.imgCard {
+    width: 14rem;
+    height: 14rem;
+    border-radius: 10px;
+    margin-bottom: 0;
+}
+
+.btn {
+    background-color: var(--thirdary-color) !important;
+    color: white !important;
+    height: min-content;
+    transition: 0.5s ease;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.example-stepper {
+    margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+    margin-top: 16px;
+}

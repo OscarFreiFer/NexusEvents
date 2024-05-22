@@ -1,6 +1,5 @@
 .footer {
-    background-image: url('../../../assets/E3-footer.jpg');
-    width: 100%;
+    background-image: url("../../../assets/E3-footer.jpg");
     height: 70rem;
     background-repeat: no-repeat;
     background-size: cover;
@@ -81,7 +80,6 @@
 }
 
 @media (max-width: 900px) {
-
     .footer {
         height: 100%;
     }

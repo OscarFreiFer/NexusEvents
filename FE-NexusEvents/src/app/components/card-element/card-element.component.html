@@ -4,14 +4,11 @@
         Eventos
         <div>{{ item.name }}</div>
     </h1>
-    <a
-        href="https://angular.io/api/common/NgStyle#exported-from"
-        target="_blank"
-    >
+    <a [routerLink]="item.name.toLowerCase()">
         <div class="card">
             <div
                 class="wrapper"
-                [ngStyle]="{ 'background-image': item.image}"
+                [ngStyle]="{ 'background-image': item.image }"
             ></div>
             <mat-icon class="my-icon" fontIcon="{{ item.icon }}"></mat-icon>
         </div>
