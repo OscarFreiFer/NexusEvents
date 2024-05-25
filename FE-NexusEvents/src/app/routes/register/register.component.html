@@ -1,65 +1,126 @@
-<div class="center">
-    <span class="logo logo-login" routerLink=""></span>
-    <h1>Register</h1>
-    <form [formGroup]="registerForm" (ngSubmit)="enviar()">
-        <div class="text-field">
-            <input
-                type="text"
-                name="name"
-                required
-                formControlName="name"
-            />
-            <span
-                [ngClass]="{'fieldError': hasErrors('name', 'required')}"
-            ></span>
-            <label
-                [ngClass]="{'fieldError': hasErrors('name', 'required')}"
-                >Nombre*</label
-            >
-        </div>
-        <div class="text-field">
-            <input type="text" name="email" required formControlName="email" />
-            <span
-                [ngClass]="{'fieldError': hasErrors('email', 'required') || hasErrors('email', 'email') }"
-            ></span>
-            <label
-                [ngClass]="{'fieldError': hasErrors('email', 'required') || hasErrors('email', 'email') }"
-                >Email*</label
-            >
-        </div>
-        <div class="text-field">
-            <input
-                type="password"
-                name="passwd"
-                required
-                formControlName="passwd"
-            />
-            <span [ngClass]="{'fieldError': hasErrors('passwd', 'required') || hasErrors('passwd', 'minlength') }"></span>
-            <label [ngClass]="{'fieldError': hasErrors('passwd', 'required') || hasErrors('passwd', 'minlength') }">Password*</label>
-        </div>
-        <div class="text-field">
-            <input
-                type="password"
-                name="repeatPasswd"
-                required
-                formControlName="repeatPasswd"
-            />
-            <span [ngClass]="{'fieldError': hasErrors('passwd', 'required') || hasErrors('passwd', 'minlength') ||registerForm.getError('passwordMismatch')}"></span>
-            <label [ngClass]="{'fieldError': hasErrors('passwd', 'required') || hasErrors('passwd', 'minlength') || registerForm.getError('passwordMismatch')}">Repeat Password*</label>
-        </div>
-        @if (hasErrors('name', 'required') || hasErrors('email', 'required') || hasErrors('passwd', 'required') || isInvalid ) {
-            <div class="errorMsg">
-                - Los campos con * son requeridos
+<div class="background-container">
+    <div class="outer-box">
+        <div class="overlay">
+            <div class="tab-container">
+                <h1 class="tab active">SIGN</h1>
+                <h1 class="tab active">UP</h1>
             </div>
-        }
-        @if (hasErrors('passwd', 'minlength') || isInvalid) {
-            <div class="errorMsg">
-                - La contraseña debe tener min 6 caracteres
+            <div class="register-container">
+                <span class="logo logo-login" routerLink=""></span>
+                <h2>Register</h2>
+                <form [formGroup]="registerForm" (ngSubmit)="enviar()">
+                    <div class="input-group">
+                        <label
+                            for="name"
+                            [ngClass]="{
+                                fieldError: hasErrors('name', 'required')
+                            }"
+                            >Nombre<span style="color: red"> *</span></label
+                        >
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            formControlName="name"
+                            required
+                            [ngClass]="{
+                                inputError: hasErrors('name', 'required')
+                            }"
+                        />
+                        <span></span>
+                    </div>
+                    <div class="input-group">
+                        <label
+                            for="email"
+                            [ngClass]="{
+                                fieldError:
+                                    hasErrors('email', 'required') ||
+                                    hasErrors('email', 'email')
+                            }"
+                            >Email<span style="color: red"> *</span></label
+                        >
+                        <input
+                            type="text"
+                            id="email"
+                            name="email"
+                            formControlName="email"
+                            required
+                            [ngClass]="{
+                                inputError:
+                                    hasErrors('email', 'required') ||
+                                    hasErrors('email', 'email')
+                            }"
+                        />
+                    </div>
+                    <div class="input-group">
+                        <label
+                            for="passwd"
+                            [ngClass]="{
+                                fieldError:
+                                    hasErrors('passwd', 'required') ||
+                                    hasErrors('passwd', 'minlength')
+                            }"
+                            >Password<span style="color: red"> *</span></label
+                        >
+                        <input
+                            type="password"
+                            id="passwd"
+                            name="passwd"
+                            formControlName="passwd"
+                            required
+                            [ngClass]="{
+                                inputError:
+                                    hasErrors('passwd', 'required') ||
+                                    hasErrors('passwd', 'minlength')
+                            }"
+                        />
+                    </div>
+                    <div class="input-group">
+                        <label
+                            for="repeatPasswd"
+                            [ngClass]="{
+                                fieldError:
+                                    hasErrors('repeatPasswd', 'required') ||
+                                    hasErrors('repeatPasswd', 'minlength') ||
+                                    registerForm.getError('passwordMismatch')
+                            }"
+                            >Repeat Password
+                            <span style="color: red"> *</span></label
+                        >
+                        <input
+                            type="password"
+                            id="repeatPasswd"
+                            name="repeatPasswd"
+                            formControlName="repeatPasswd"
+                            required
+                            [ngClass]="{
+                                inputError:
+                                    hasErrors('repeatPasswd', 'required') ||
+                                    hasErrors('repeatPasswd', 'minlength') ||
+                                    registerForm.getError('passwordMismatch')
+                            }"
+                        />
+                    </div>
+                    <div class="error-messages">
+                        @if (hasErrors('name', 'required') || hasErrors('email',
+                        'required') || hasErrors('passwd', 'required') ||
+                        isInvalid) {
+                        <div class="errorMsg">
+                            - Los campos con * son requeridos
+                        </div>
+
+                        } @if (hasErrors('passwd', 'minlength') || isInvalid) {
+                        <div class="errorMsg">
+                            - La contraseña debe tener min 6 caracteres
+                        </div>
+                        }
+                    </div>
+                    <button>Sign Up</button>
+                </form>
+                <div class="signup_link">
+                    ¿Ya tienes usuario? <a routerLink="/login">Log In</a>
+                </div>
             </div>
-        }
-        <button mat-raised-button class="btn">Login</button>
-        <div class="singup_link">
-            ¿Ya tienes usuario? <a routerLink="/login">Log In</a>
         </div>
-    </form>
+    </div>
 </div>

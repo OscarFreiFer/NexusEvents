@@ -5,6 +5,8 @@ import { RegisterComponent } from './routes/register/register.component';
 import { DeportivosComponent } from './routes/eventos/deportivos/deportivos.component';
 import { InstitucionalesComponent } from './routes/eventos/institucionales/institucionales.component';
 import { CorporativosComponent } from './routes/eventos/corporativos/corporativos.component';
+import { authGuard } from './guards/auth.guard';
+import { ProfileComponent } from './routes/profile/profile.component';
 
 export const routes: Routes = [
     {
@@ -35,5 +37,10 @@ export const routes: Routes = [
     {
         path: 'corporativos',
         component: CorporativosComponent,
+    },
+    {
+        path: 'profile',
+        component: ProfileComponent,
+        canActivate: [authGuard],
     },
 ];

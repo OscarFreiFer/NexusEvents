@@ -1,21 +1,46 @@
-<div class="center">
-    <span class="logo logo-login" routerLink=""></span>
-    <h1>Login</h1>
-    <form action="#" method="post">
-        <div class="text-field">
-            <input type="text" required />
-            <span></span>
-            <label>Email</label>
+<div class="background-container">
+    <div class="outer-box">
+        <div class="overlay">
+            <div class="tab-container">
+                <h1 class="tab active">SIGN</h1>
+                <h1 class="tab active">IN</h1>
+            </div>
+            <div class="login-container">
+                <span class="logo logo-login" routerLink=""></span>
+                <h2>Login</h2>
+                <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+                    <div class="input-group">
+                        <label for="Email">Email</label>
+                        <input
+                            type="text"
+                            id="Email"
+                            name="email"
+                            required
+                            [(ngModel)]="user.email"
+                        />
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            required
+                            [(ngModel)]="user.password"
+                        />
+                    </div>
+                    @if (!isValid) {
+                    <div class="fieldError">
+                        - El email o la contraseña son incorrectos
+                    </div>
+                    }
+                    <button type="submit">Sign In</button>
+                </form>
+                <div class="signup_link">
+                    ¿Todavía no tienes cuenta?
+                    <a routerLink="/register">Sign Up</a>
+                </div>
+            </div>
         </div>
-        <div class="text-field">
-            <input type="password" required />
-            <span></span>
-            <label>Password</label>
-        </div>
-        <div class="pass">Forgot Password?</div>
-        <button mat-raised-button class="btn">Login</button>
-        <div class="singup_link">
-            ¿Todavía no estás registrado? <a routerLink="/register">Sign Up</a>
-        </div>
-    </form>
+    </div>
 </div>

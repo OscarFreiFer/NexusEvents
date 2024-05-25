@@ -5,21 +5,27 @@ import { environment } from '../../environments/environment.development';
 import { Observable, shareReplay } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root',
 })
 export class UserService {
+    constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
+    register(user: User): Observable<string> {
+        let response = this.http
+            .post<string>(environment.apiURL + '/Users/register', user)
+            .pipe(shareReplay());
+        return response;
+    }
 
-  register(user :User): Observable<User> {
-    let response = this.http.post<User>(environment.apiURL + '/Users/register', user).pipe(shareReplay());
-    return response;
-  }
+    login(user: User): Observable<string> {
+        let request = {
+            email: user.email,
+            password: user.password,
+        };
 
-  login(email?: string, passwd?: string){
-    let response = this.http.get(environment.apiURL + '/Users')
-    
-    // let response = this.http.post(environment.apiURL + '/Users/login', {email: email, password:  passwd}).pipe(shareReplay());
-    return response;
-  }
+        let response = this.http
+            .post<string>(environment.apiURL + '/Users/login', request)
+            .pipe(shareReplay());
+        return response;
+    }
 }

@@ -4,7 +4,6 @@ namespace BE_NexusEvents.Models.DTO
 {
     public class LoginDTO
     {
-        public int Id { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -15,5 +14,11 @@ namespace BE_NexusEvents.Models.DTO
         [DataType(DataType.EmailAddress)]
         [EmailAddress(ErrorMessage = "Correo electrónico inválido.")]
         public string Email { get; set; }
+    }
+
+    public class LoginRegisterResponse
+    {
+        public string Token { get; set; }
+        public long Id { get; set; }
     }
 }

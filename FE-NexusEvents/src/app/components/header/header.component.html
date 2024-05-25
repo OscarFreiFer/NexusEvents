@@ -1,21 +1,17 @@
 <header>
     <mat-toolbar class="toolbar">
-        <button
-            mat-icon-button
-            aria-label="Example icon-button with menu icon"
-        >
-            <mat-icon fontIcon="menu"/>
+        <button mat-icon-button aria-label="Example icon-button with menu icon">
+            <mat-icon fontIcon="menu" />
         </button>
         <span class="logo" routerLink=""></span>
         <div>
-        <button
-            mat-icon-button
-            aria-label="Example icon-button with heart icon"
-            routerLink="/login"
-        >
-            <mat-icon fontIcon="person" />
-        </button>
+            <button
+                mat-icon-button
+                aria-label="Example icon-button with heart icon"
+                (click)="handleClick()"
+            >
+                <mat-icon fontIcon="person" />
+            </button>
         </div>
     </mat-toolbar>
 </header>
-

@@ -1,0 +1,68 @@
+<!-- Formulario de prueba -->
+<mat-stepper
+    class="example-stepper"
+    [orientation]="(stepperOrientation | async)!"
+>
+    <mat-step [stepControl]="firstFormGroup" label="Ponga nombre al evento">
+        <form [formGroup]="firstFormGroup">
+            <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input
+                    matInput
+                    placeholder="Nombre evento"
+                    formControlName="firstCtrl"
+                    required
+                />
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperNext>Siguiente</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step
+        [stepControl]="secondFormGroup"
+        label="Seleccione fecha para el evento"
+    >
+        <form [formGroup]="secondFormGroup">
+            <mat-form-field>
+                <mat-label>Fecha</mat-label>
+                <input
+                    matInput
+                    formControlName="secondCtrl"
+                    placeholder=""
+                    required
+                />
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperPrevious>Atrás</button>
+                <button mat-button matStepperNext>Siguiente</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup" label="Agregue una descripción">
+        <form [formGroup]="thirdFormGroup">
+            <mat-form-field>
+                <mat-label>Agregue descripción</mat-label>
+                <textarea
+                    matInput
+                    formControlName="thirdCtrl"
+                    placeholder="Descripción del evento"
+                    required
+                ></textarea>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperPrevious>Atrás</button>
+                <button mat-button matStepperNext>Siguiente</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Crear</ng-template>
+        <p>Revise los campos rellenos.</p>
+        <p>Pulsa "Finalizar" para confirmar la reserva.</p>
+        <div>
+            <button mat-button (click)="onSubmit()">Finalizar</button>
+        </div>
+    </mat-step>
+</mat-stepper>
+<!-- Aquí acaba el formulario -->

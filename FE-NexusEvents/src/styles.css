@@ -237,18 +237,18 @@ input[type="submit"]:hover {
     transform: translateY(-1rem);
 }
 
-.singup_link {
-    margin: 3rem 0;
+.signup_link {
+    margin-top: 2rem;
     text-align: center;
     font-size: 1.4rem;
     color: rgb(102, 102, 102);
 }
 
-.singup_link a {
+.signup_link a {
     color: rgb(38, 145, 217);
     text-decoration: none;
 }
 
-.singup_link a:hover {
+.signup_link a:hover {
     text-decoration: underline;
 }

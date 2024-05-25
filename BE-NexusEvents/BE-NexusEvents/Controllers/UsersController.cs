@@ -9,6 +9,7 @@ using BE_NexusEvents.Context;
 using BE_NexusEvents.Models;
 using BCrypt.Net;
 using BE_NexusEvents.Models.DTO;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace BE_NexusEvents.Controllers
 {
@@ -25,7 +26,7 @@ namespace BE_NexusEvents.Controllers
 
         // POST: api/Users/login
         [HttpPost("login")]
-        public async Task<ActionResult<User>> Login(LoginDTO user)
+        public async Task<ActionResult<LoginRegisterResponse>> Login(LoginDTO user)
         {
             var userInDb = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
 
@@ -34,7 +35,11 @@ namespace BE_NexusEvents.Controllers
                 return Unauthorized();
             }
 
-            return userInDb;
+            string uniqueKey = $"{user.Email}_{DateTime.UtcNow.ToString("dd.MM.yyyy HH.mm.ss")}";
+            string token = BCrypt.Net.BCrypt.HashPassword(uniqueKey);
+
+
+            return Ok(new { Token = token, Id = userInDb.Id});
         }
 
         // GET: api/Users
@@ -61,8 +66,9 @@ namespace BE_NexusEvents.Controllers
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("register")]
-        public async Task<ActionResult<UserDTO>> PostUser(UserEntity userEntity)
+        public async Task<ActionResult<LoginRegisterResponse>> PostUser(UserEntity userEntity)
         {
+            // Encrypt password
             userEntity.Password = BCrypt.Net.BCrypt.HashPassword(userEntity.Password);
 
             var user = new User
@@ -72,12 +78,14 @@ namespace BE_NexusEvents.Controllers
                 Password = userEntity.Password,
                 CreatedDate = DateTime.UtcNow
             };
-            // Encrypt password
+
+            string uniqueKey = $"{user.Email}_{DateTime.UtcNow.ToString("dd.MM.yyyy HH.mm.ss")}";
+            string token = BCrypt.Net.BCrypt.HashPassword(uniqueKey);
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUser", new { id = userEntity.Id }, userEntity);
+            
+            return CreatedAtAction("GetUser", new { Token = token, id = user.Id}, new { Token = token, id = user.Id });
         }
 
         // PUT: api/Users/5

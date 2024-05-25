@@ -20,9 +20,14 @@ import { FooterComponent } from './components/footer/footer.component';
 export class AppComponent {
     title: string = 'Nexus Events';
 
-    constructor(private router: Router){}
+    constructor(private router: Router) {}
 
-    isLoginRegisterPage() : boolean {
-        return this.router.url === '/login' || this.router.url === '/register';
+    isLoginRegisterPage(): boolean {
+        const regexLogin = /\/login/;
+        const regexRegister = /\/register/;
+        return (
+            regexLogin.test(this.router.url) ||
+            regexRegister.test(this.router.url)
+        );
     }
 }
