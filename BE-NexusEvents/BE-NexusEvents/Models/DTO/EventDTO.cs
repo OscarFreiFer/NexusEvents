@@ -1,10 +1,8 @@
-﻿using BE_NexusEvents.Models.DTO;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace BE_NexusEvents.Models
+namespace BE_NexusEvents.Models.DTO
 {
-    public class Event
+    public class EventDTO
     {
         public int Id { get; set; }
         [Required]
@@ -16,13 +14,11 @@ namespace BE_NexusEvents.Models
         [Required]
         public DateTime EndDate { get; set; }
         public string? ImageUrl { get; set; }
+    }
 
-        [ForeignKey("User")]
+    public class EventEntity : EventDTO
+    {
         public int UserID { get; set; }
-
-        [ForeignKey("Space")]
         public int SpaceID { get; set; }
-
-        public DateTime CreatedDate { get; set; }
     }
 }

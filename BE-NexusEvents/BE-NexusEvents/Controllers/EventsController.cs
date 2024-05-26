@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BE_NexusEvents.Context;
 using BE_NexusEvents.Models;
+using BE_NexusEvents.Models.DTO;
 
 namespace BE_NexusEvents.Controllers
 {
@@ -76,12 +77,24 @@ namespace BE_NexusEvents.Controllers
         // POST: api/Events
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Event>> PostEvent(Event @event)
+        public async Task<ActionResult<EventEntity>> PostEvent(EventEntity eventEntity)
         {
-            _context.Events.Add(@event);
+            var eventModel = new Event
+            {
+                Name = eventEntity.Name,
+                StartDate = eventEntity.StartDate,
+                EndDate = eventEntity.EndDate,
+                Description = eventEntity.Description,
+                UserID = eventEntity.UserID,
+                SpaceID = eventEntity.SpaceID,
+                ImageUrl = eventEntity.ImageUrl,
+                CreatedDate = DateTime.Now,
+            };
+            _context.Events.Add(eventModel);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEvent", new { id = @event.Id }, @event);
+
+            return CreatedAtAction("GetEvent", new { id = eventModel.Id }, eventEntity);
         }
 
         // DELETE: api/Events/5

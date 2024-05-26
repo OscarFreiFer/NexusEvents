@@ -8,16 +8,28 @@ import {
 } from '@angular/forms';
 import { VenueService } from '../../services/venue.service';
 import { Observable, map } from 'rxjs';
-import { StepperOrientation } from '@angular/cdk/stepper';
-import { AsyncPipe } from '@angular/common';
+import {
+    STEPPER_GLOBAL_OPTIONS,
+    StepperOrientation,
+} from '@angular/cdk/stepper';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
     selector: 'app-form-events',
     standalone: true,
+    providers: [
+        {
+            provide: STEPPER_GLOBAL_OPTIONS,
+            useValue: { showError: true },
+        },
+        provideNativeDateAdapter(),
+    ],
     imports: [
         AsyncPipe,
         MatStepperModule,
@@ -26,6 +38,8 @@ import { MatButtonModule } from '@angular/material/button';
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
+        MatDatepickerModule,
+        DatePipe,
     ],
     templateUrl: './form-events.component.html',
     styleUrl: './form-events.component.css',
@@ -35,12 +49,15 @@ export class FormEventsComponent {
         firstCtrl: ['', Validators.required],
     });
     secondFormGroup = this._formBuilder.group({
-        secondCtrl: ['', Validators.required],
+        start: ['', Validators.required],
+        end: ['', Validators.required],
     });
     thirdFormGroup = this._formBuilder.group({
         thirdCtrl: ['', Validators.required],
     });
     stepperOrientation: Observable<StepperOrientation>;
+
+    minDate: Date = new Date();
 
     constructor(
         private venueService: VenueService,
@@ -50,7 +67,17 @@ export class FormEventsComponent {
         this.stepperOrientation = breakpointObserver
             .observe('(min-width: 1024px)')
             .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
+        /*         const currentDate = new Date().toISOString();
+        this.minDate = new Date(currentDate); */
+        console.log(this.minDate);
     }
 
-    onSubmit() {}
+    dateFilter(date: Date): boolean {
+        console.log(date.getDate());
+        return date.getDate() != 29;
+    }
+
+    onSubmit() {
+        console.log(this.minDate);
+    }
 }

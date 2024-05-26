@@ -3,7 +3,12 @@
     class="example-stepper"
     [orientation]="(stepperOrientation | async)!"
 >
-    <mat-step [stepControl]="firstFormGroup" label="Ponga nombre al evento">
+    <!-- NOMBRE DEL EVENTO -->
+    <mat-step
+        [stepControl]="firstFormGroup"
+        label="Ponga nombre al evento"
+        errorMessage="El nombre es obligatorio"
+    >
         <form [formGroup]="firstFormGroup">
             <mat-form-field>
                 <mat-label>Nombre</mat-label>
@@ -19,19 +24,38 @@
             </div>
         </form>
     </mat-step>
+    <!-- FECHA DEL EVENTO -->
     <mat-step
         [stepControl]="secondFormGroup"
         label="Seleccione fecha para el evento"
+        errorMessage="La fecha es obligatoria"
     >
         <form [formGroup]="secondFormGroup">
             <mat-form-field>
                 <mat-label>Fecha</mat-label>
-                <input
-                    matInput
-                    formControlName="secondCtrl"
-                    placeholder=""
-                    required
-                />
+
+                <mat-date-range-input
+                    [rangePicker]="picker"
+                    [min]="minDate"
+                    [dateFilter]="dateFilter"
+                >
+                    <input
+                        matStartDate
+                        formControlName="start"
+                        placeholder="Fecha inicio"
+                    />
+                    <input
+                        matEndDate
+                        formControlName="end"
+                        placeholder="Fecha fin"
+                    />
+                </mat-date-range-input>
+                <mat-hint>MM/DD/YYYY - MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
             </mat-form-field>
             <div>
                 <button mat-button matStepperPrevious>Atrás</button>
@@ -39,7 +63,12 @@
             </div>
         </form>
     </mat-step>
-    <mat-step [stepControl]="thirdFormGroup" label="Agregue una descripción">
+    <!-- DESCRIPCIÓN DEL EVENTO -->
+    <mat-step
+        [stepControl]="thirdFormGroup"
+        label="Agregue una descripción"
+        errorMessage="La descripción es obligatoria"
+    >
         <form [formGroup]="thirdFormGroup">
             <mat-form-field>
                 <mat-label>Agregue descripción</mat-label>

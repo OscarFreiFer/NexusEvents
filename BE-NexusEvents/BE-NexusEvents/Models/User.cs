@@ -23,7 +23,5 @@ namespace BE_NexusEvents.Models
         public string Email { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        [InverseProperty("User")]
-        public ICollection<Event> Events { get; set; } //Inverse navigation
     }
 }

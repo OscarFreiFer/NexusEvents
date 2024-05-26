@@ -5,13 +5,37 @@
         </button>
         <span class="logo" routerLink=""></span>
         <div>
-            <button
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon fontIcon="person" />
+            </button>
+            <mat-menu #menu="matMenu">
+                @if (!isLogged) {
+                <button mat-menu-item (click)="handleClick('/login')">
+                    <mat-icon fontIcon="login" />
+                    <span>Log in</span>
+                </button>
+                <button mat-menu-item (click)="handleClick('/register')">
+                    <mat-icon fontIcon="person_add" />
+                    <span>Sign up</span>
+                </button>
+                }@else {
+                <button mat-menu-item (click)="handleClick('/profile')">
+                    <mat-icon fontIcon="person" />
+                    <span>Perfil</span>
+                </button>
+                <button mat-menu-item (click)="handleClick('logout')">
+                    <mat-icon fontIcon="logout" />
+                    <span>Log out</span>
+                </button>
+                }
+            </mat-menu>
+            <!--             <button
                 mat-icon-button
                 aria-label="Example icon-button with heart icon"
                 (click)="handleClick()"
             >
                 <mat-icon fontIcon="person" />
-            </button>
+            </button> -->
         </div>
     </mat-toolbar>
 </header>
