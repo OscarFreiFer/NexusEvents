@@ -22,6 +22,7 @@ namespace BE_NexusEvents.Models
 
         [ForeignKey("Space")]
         public int SpaceID { get; set; }
+        public Space Space { get; set; }
 
         public DateTime CreatedDate { get; set; }
     }

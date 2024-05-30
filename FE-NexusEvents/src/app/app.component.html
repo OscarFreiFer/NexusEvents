@@ -1,9 +1,29 @@
 <div class="main-container">
-    @if (!isLoginRegisterPage()) {       
-        <app-header title="{{title | uppercase}}"/>
-    }
-    <router-outlet />
     @if (!isLoginRegisterPage()) {
-        <app-footer />
+    <app-header title="{{ title | uppercase }}" />
+
+    <mat-drawer-container>
+        <mat-drawer
+            #drawer
+            [mode]="'over'"
+            style="width: 15%; max-width: 200px"
+        >
+            @for (item of eventsType; track $index) {
+            <div
+                class="sidenav_item"
+                (click)="onClick(item.name.toLowerCase())"
+            >
+                <mat-icon [fontIcon]="item.icon" class="my-icon"></mat-icon>
+                <a class="sidenav_route">{{ item.name }}</a>
+            </div>
+            }
+        </mat-drawer>
+        <mat-drawer-content>
+            <router-outlet />
+            <app-footer />
+        </mat-drawer-content>
+    </mat-drawer-container>
+    }@else {
+    <router-outlet />
     }
 </div>

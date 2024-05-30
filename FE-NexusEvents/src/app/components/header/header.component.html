@@ -1,6 +1,10 @@
 <header>
     <mat-toolbar class="toolbar">
-        <button mat-icon-button aria-label="Example icon-button with menu icon">
+        <button
+            mat-icon-button
+            aria-label="Example icon-button with menu icon"
+            (click)="onHandleDrawer()"
+        >
             <mat-icon fontIcon="menu" />
         </button>
         <span class="logo" routerLink=""></span>
@@ -29,13 +33,6 @@
                 </button>
                 }
             </mat-menu>
-            <!--             <button
-                mat-icon-button
-                aria-label="Example icon-button with heart icon"
-                (click)="handleClick()"
-            >
-                <mat-icon fontIcon="person" />
-            </button> -->
         </div>
     </mat-toolbar>
 </header>

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { Events } from '../../interfaces/events';
+import { EventsType } from '../../interfaces/eventsType';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,5 +11,5 @@ import { CommonModule } from '@angular/common';
     styleUrl: './dashboard-projects.component.css',
 })
 export class DashboardProjectsComponent {
-    @Input() eventsType: Events[] = [];
+    @Input() eventsType: EventsType[] = [];
 }

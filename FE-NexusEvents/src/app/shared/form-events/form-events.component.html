@@ -10,7 +10,7 @@
         errorMessage="El nombre es obligatorio"
     >
         <form [formGroup]="firstFormGroup">
-            <mat-form-field>
+            <mat-form-field style="width: 50%">
                 <mat-label>Nombre</mat-label>
                 <input
                     matInput
@@ -31,31 +31,13 @@
         errorMessage="La fecha es obligatoria"
     >
         <form [formGroup]="secondFormGroup">
-            <mat-form-field>
-                <mat-label>Fecha</mat-label>
-
-                <mat-date-range-input
-                    [rangePicker]="picker"
-                    [min]="minDate"
-                    [dateFilter]="dateFilter"
-                >
-                    <input
-                        matStartDate
-                        formControlName="start"
-                        placeholder="Fecha inicio"
-                    />
-                    <input
-                        matEndDate
-                        formControlName="end"
-                        placeholder="Fecha fin"
-                    />
-                </mat-date-range-input>
-                <mat-hint>MM/DD/YYYY - MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle
-                    matIconSuffix
-                    [for]="picker"
-                ></mat-datepicker-toggle>
-                <mat-date-range-picker #picker></mat-date-range-picker>
+            <mat-form-field style="width: 50%">
+                <mat-label>Fecha inicio a fin del evento</mat-label>
+                <input
+                    matInput
+                    [id]="idName + spaceId"
+                    formControlName="rangeCtrl"
+                />
             </mat-form-field>
             <div>
                 <button mat-button matStepperPrevious>Atrás</button>
@@ -70,7 +52,7 @@
         errorMessage="La descripción es obligatoria"
     >
         <form [formGroup]="thirdFormGroup">
-            <mat-form-field>
+            <mat-form-field style="width: 100%">
                 <mat-label>Agregue descripción</mat-label>
                 <textarea
                     matInput

@@ -44,9 +44,7 @@ export class VenuesDisplayComponent implements OnInit {
     currentPage: number = 0;
     pageSize: number = 7;
     paginatedVenues: Venue[] = [];
-
-    //@ViewChild(MatPaginator) paginator!: MatPaginator;
-    @ViewChild('panel') panel!: MatExpansionPanel;
+    spaceId: number = 0;
 
     constructor(
         private venueService: VenueService,
@@ -66,9 +64,9 @@ export class VenuesDisplayComponent implements OnInit {
         this.isLoading = false;
     }
 
-    handleClick(): void {
+    handleClick(id: number): void {
         if (this.sessionService.isLogged()) {
-            this.panel.toggle();
+            this.spaceId = id;
             this.isDisabled = true;
         }
     }

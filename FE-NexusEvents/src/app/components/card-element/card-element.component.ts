@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { Events } from '../../interfaces/events';
-import { RouterLink } from '@angular/router';
-
+import { EventsType } from '../../interfaces/eventsType';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-card-element',
@@ -13,5 +12,11 @@ import { RouterLink } from '@angular/router';
     styleUrl: './card-element.component.css',
 })
 export class CardElementComponent {
-    @Input() eventsType : Events[] = [];
+    @Input() eventsType: EventsType[] = [];
+
+    constructor(private router: Router) {}
+
+    onClick(ruta: string): void {
+        this.router.navigateByUrl(ruta);
+    }
 }

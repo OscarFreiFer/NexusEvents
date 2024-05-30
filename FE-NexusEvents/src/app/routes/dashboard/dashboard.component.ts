@@ -4,7 +4,7 @@ import { CardElementComponent } from '../../components/card-element/card-element
 import { DashboardProjectsComponent } from '../../components/dashboard-projects/dashboard-projects.component';
 import { NgStyle, UpperCasePipe } from '@angular/common';
 import { FooterComponent } from '../../components/footer/footer.component';
-import { Events, events } from '../../interfaces/events';
+import { EventsType, eventsType } from '../../interfaces/eventsType';
 
 @Component({
     selector: 'app-dashboard',
@@ -22,5 +22,5 @@ import { Events, events } from '../../interfaces/events';
 })
 export class DashboardComponent {
     title: string = 'Nexus Events';
-    eventsTpye: Events[] = events;
+    eventsTpye: EventsType[] = eventsType;
 }

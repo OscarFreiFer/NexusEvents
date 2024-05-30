@@ -131,8 +131,7 @@
     line-height: 1;
 }
 
-
-.cards-container{
+.cards-container {
     display: flex;
     justify-content: center;
     width: 100%;

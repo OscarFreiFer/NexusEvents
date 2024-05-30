@@ -4,7 +4,7 @@
         Eventos
         <div>{{ item.name }}</div>
     </h1>
-    <a [routerLink]="item.name.toLowerCase()">
+    <a (click)="onClick(item.name.toLowerCase())">
         <div class="card">
             <div
                 class="wrapper"

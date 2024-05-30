@@ -55,12 +55,15 @@ export class SessionService {
 
     getUserId(): number {
         let profile: string | null = null;
+        let userId: number = 0;
         if (typeof localStorage !== 'undefined') {
             profile = localStorage.getItem('NexusEventsUserId');
         } else if (typeof sessionStorage !== 'undefined') {
             profile = sessionStorage.getItem('NexusEventsUserId');
         }
-
-        return profile ? JSON.parse(profile).user.id : null;
+        if (profile) {
+            userId = parseInt(profile);
+        }
+        return userId;
     }
 }

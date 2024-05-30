@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VenuesDisplayComponent } from '../../../shared/venues-display/venues-display.component';
-import { events } from '../../../interfaces/events';
+import { eventsType } from '../../../interfaces/eventsType';
 
 @Component({
     selector: 'app-institucionales',
@@ -10,7 +10,7 @@ import { events } from '../../../interfaces/events';
     styleUrl: './institucionales.component.css',
 })
 export class InstitucionalesComponent implements OnInit {
-    venueId: number = events.find((e) => e.name === 'Institucionales')!.id;
+    venueId: number = eventsType.find((e) => e.name === 'Institucionales')!.id;
 
     constructor() {}
 

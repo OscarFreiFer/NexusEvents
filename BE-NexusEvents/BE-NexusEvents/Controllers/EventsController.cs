@@ -43,6 +43,39 @@ namespace BE_NexusEvents.Controllers
             return @event;
         }
 
+        [HttpGet("dates/{spaceId}")]
+        public ActionResult<IEnumerable<EventsDatesDTO>> GetEventDates(long spaceId)
+        {
+            var eventDates = _context.Events
+                .Where(e => e.SpaceID == spaceId)
+                .Select(e => new EventsDatesDTO
+                {
+                    StartDate = e.StartDate,
+                    EndDate = e.EndDate
+                })
+                .ToList();
+
+            return Ok(eventDates);
+        }
+
+
+        // GET: api/Events/User/{userId}
+        [HttpGet("User/{userId}")]
+        public async Task<ActionResult<IEnumerable<EventEntity>>> GetEventsByUserId(int userId)
+        {
+            var events = await _context.Events
+                .Include(e => e.Space)
+                .Where(e => e.UserID == userId)
+                .ToListAsync();
+
+            if (events == null || !events.Any())
+            {
+                return NotFound();
+            }
+
+            return Ok(events);
+        }
+
         // PUT: api/Events/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -79,38 +112,88 @@ namespace BE_NexusEvents.Controllers
         [HttpPost]
         public async Task<ActionResult<EventEntity>> PostEvent(EventEntity eventEntity)
         {
-            var eventModel = new Event
+            //Como voy a modificar dos tablas lo hago con una transacción por si falla una de las 2 que no se cree.
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
             {
-                Name = eventEntity.Name,
-                StartDate = eventEntity.StartDate,
-                EndDate = eventEntity.EndDate,
-                Description = eventEntity.Description,
-                UserID = eventEntity.UserID,
-                SpaceID = eventEntity.SpaceID,
-                ImageUrl = eventEntity.ImageUrl,
-                CreatedDate = DateTime.Now,
-            };
-            _context.Events.Add(eventModel);
-            await _context.SaveChangesAsync();
+                var eventModel = new Event
+                {
+                    Name = eventEntity.Name,
+                    StartDate = eventEntity.StartDate,
+                    EndDate = eventEntity.EndDate,
+                    Description = eventEntity.Description,
+                    UserID = eventEntity.UserID,
+                    SpaceID = eventEntity.SpaceID,
+                    ImageUrl = eventEntity.ImageUrl,
+                    CreatedDate = DateTime.Now,
+                };
 
+                _context.Events.Add(eventModel);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEvent", new { id = eventModel.Id }, eventEntity);
+                // Añadimos también la reserva
+                var reserveModel = new Reserve
+                {
+                    SpaceId = eventEntity.SpaceID,
+                    UserId = eventEntity.UserID,
+                    EventId = eventModel.Id,
+                    CreatedDate = DateTime.Now,
+                };
+
+                _context.Reserves.Add(reserveModel);
+                await _context.SaveChangesAsync();
+
+                // Commit 
+                await transaction.CommitAsync();
+
+                return CreatedAtAction("GetEvent", new { id = eventModel.Id }, eventEntity);
+            }
+            catch (Exception)
+            {
+                // Rollback 
+                await transaction.RollbackAsync();
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         // DELETE: api/Events/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEvent(int id)
         {
-            var @event = await _context.Events.FindAsync(id);
-            if (@event == null)
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
             {
-                return NotFound();
+                var eventModel = await _context.Events.FindAsync(id);
+                if (eventModel == null)
+                {
+                    return NotFound();
+                }
+
+                var reserveModel = await _context.Reserves
+                                                 .Where(r => r.EventId == id)
+                                                 .FirstOrDefaultAsync();
+
+                // Primero elimino la reserva para que no haya problemas con la clave foránea
+                if (reserveModel != null)
+                {
+                    _context.Reserves.Remove(reserveModel);
+                }
+
+                // Luego elimino el evento
+                _context.Events.Remove(eventModel);
+                await _context.SaveChangesAsync();
+
+                // Commit 
+                await transaction.CommitAsync();
+
+                return NoContent();
             }
-
-            _context.Events.Remove(@event);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            catch (Exception)
+            {
+                // Rollback transaction if there is an error
+                await transaction.RollbackAsync();
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         private bool EventExists(int id)

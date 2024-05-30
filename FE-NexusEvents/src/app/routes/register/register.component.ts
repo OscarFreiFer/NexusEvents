@@ -61,7 +61,7 @@ export class RegisterComponent {
             this.userService.register(user).subscribe({
                 next: (data: any) => {
                     this.sessionService.setToken(data.token);
-                    this.sessionService.setProfile(data.user);
+                    this.sessionService.setProfile(data.id);
                     this.router.navigateByUrl(
                         this.router.routerState.snapshot.root.queryParams[
                             'returnUrl'

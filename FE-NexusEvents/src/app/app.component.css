@@ -3,3 +3,43 @@
     display: grid;
     align-content: space-between;
 }
+
+.sidenav_item {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 2rem;
+    cursor: pointer;
+}
+
+.sidenav_item:hover {
+    background-color: rgb(230, 230, 230);
+}
+
+.my-icon {
+    cursor: pointer;
+    color: var(--secondary-color);
+    transition: all 0.5s linear;
+}
+
+.sidenav_item:hover .sidenav_route,
+.sidenav_item:hover .my-icon {
+    transform: translateY(-2px);
+    filter: drop-shadow(2px 2px 4px rgba(12, 13, 19, 0.685));
+}
+
+.sidenav_route {
+    color: var(--secondary-color);
+    cursor: pointer;
+    transition: all 0.5s linear;
+}
+
+@media (max-width: 800px) {
+    .sidenav_route {
+        display: none;
+    }
+    .sidenav_item {
+        justify-content: center;
+    }
+}

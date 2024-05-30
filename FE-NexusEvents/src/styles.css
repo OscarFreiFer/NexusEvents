@@ -252,3 +252,10 @@ input[type="submit"]:hover {
 .signup_link a:hover {
     text-decoration: underline;
 }
+
+.title_slogan {
+    font-size: 4.8rem;
+    font-weight: 900;
+    letter-spacing: 0.5rem;
+    line-height: 1;
+}

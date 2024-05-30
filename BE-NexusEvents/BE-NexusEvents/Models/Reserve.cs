@@ -15,10 +15,7 @@ namespace BE_NexusEvents.Models
         public int UserId { get; set; }
         public User User { get; set; }
 
-        [Required]
-        public DateTime InitialDate { get; set; }
-        [Required]
-        public DateTime EndDate { get; set;}
+        public int EventId { get; set; }
 
         public DateTime CreatedDate { get; set; }
 

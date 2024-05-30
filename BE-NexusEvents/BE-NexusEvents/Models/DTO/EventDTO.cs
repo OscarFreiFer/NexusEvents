@@ -20,5 +20,6 @@ namespace BE_NexusEvents.Models.DTO
     {
         public int UserID { get; set; }
         public int SpaceID { get; set; }
+        public Space Space { get; set; }
     }
 }

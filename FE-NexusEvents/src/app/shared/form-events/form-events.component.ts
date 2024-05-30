@@ -1,5 +1,11 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component } from '@angular/core';
+import {
+    Component,
+    Input,
+    OnChanges,
+    OnInit,
+    SimpleChanges,
+} from '@angular/core';
 import {
     FormBuilder,
     FormsModule,
@@ -19,6 +25,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import flatpickr from 'flatpickr';
+import { EventsService } from '../../services/events.service';
+import { DateEvents } from '../../interfaces/date-events';
+import { Events } from '../../interfaces/events';
+import { SessionService } from '../../services/session.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-form-events',
@@ -44,40 +56,105 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     templateUrl: './form-events.component.html',
     styleUrl: './form-events.component.css',
 })
-export class FormEventsComponent {
+export class FormEventsComponent implements OnInit, OnChanges {
+    @Input() spaceId: number = 0;
+    disabledDates: Date[] = [];
+    minDate: Date = new Date();
+
+    idName: string = 'fecha';
+
     firstFormGroup = this._formBuilder.group({
         firstCtrl: ['', Validators.required],
     });
     secondFormGroup = this._formBuilder.group({
-        start: ['', Validators.required],
-        end: ['', Validators.required],
+        rangeCtrl: ['', Validators.required],
     });
     thirdFormGroup = this._formBuilder.group({
         thirdCtrl: ['', Validators.required],
     });
     stepperOrientation: Observable<StepperOrientation>;
 
-    minDate: Date = new Date();
-
     constructor(
-        private venueService: VenueService,
+        private sessionService: SessionService,
         private _formBuilder: FormBuilder,
+        private eventsService: EventsService,
         breakpointObserver: BreakpointObserver
     ) {
         this.stepperOrientation = breakpointObserver
             .observe('(min-width: 1024px)')
             .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
-        /*         const currentDate = new Date().toISOString();
-        this.minDate = new Date(currentDate); */
-        console.log(this.minDate);
     }
 
-    dateFilter(date: Date): boolean {
-        console.log(date.getDate());
-        return date.getDate() != 29;
+    ngOnChanges(changes: SimpleChanges): void {
+        this.eventsService.getDateEvents(this.spaceId).subscribe({
+            next: (data: any) => {
+                this.disabledDates = this.generateDisabledDates(data);
+                flatpickr('#' + this.idName + this.spaceId, {
+                    mode: 'range',
+                    minDate: 'today',
+                    dateFormat: 'm-d-y',
+                    disable: this.disabledDates,
+                });
+            },
+        });
+    }
+
+    ngOnInit(): void {}
+
+    ngAfterViewInit() {}
+
+    // Genera un array de fechas deshabilitadas a partir de los rangos de fechas
+    private generateDisabledDates(dateRanges: DateEvents[]): Date[] {
+        const disabledDates: Date[] = [];
+        dateRanges.forEach((range) => {
+            const startDate = new Date(range.startDate);
+            const endDate = new Date(range.endDate);
+            let currentDate = new Date(startDate);
+
+            // Solo incluir fechas que son posteriores a minDate
+            if (currentDate < this.minDate) {
+                currentDate = new Date(this.minDate);
+            }
+
+            while (currentDate <= endDate) {
+                disabledDates.push(new Date(currentDate));
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+        });
+        return disabledDates;
     }
 
     onSubmit() {
-        console.log(this.minDate);
+        if (
+            this.firstFormGroup.valid &&
+            this.secondFormGroup.valid &&
+            this.thirdFormGroup.valid
+        ) {
+            var rangeDates = this.secondFormGroup.value?.rangeCtrl?.split(' ');
+            var startDate: Date = new Date();
+            var endDate: Date = new Date();
+            if (rangeDates) {
+                startDate = new Date(rangeDates[0]);
+                endDate = new Date(rangeDates[rangeDates.length - 1]);
+            }
+            const eventCreated: Events = {
+                name: this.firstFormGroup.value?.firstCtrl,
+                startDate: startDate,
+                endDate: endDate,
+                description: this.thirdFormGroup.value?.thirdCtrl,
+                imageUrl: null,
+                spaceId: this.spaceId,
+                userId: this.sessionService.getUserId(),
+            };
+            this.eventsService.postEvent(eventCreated).subscribe({
+                next: () => {
+                    this.firstFormGroup.reset();
+                    this.secondFormGroup.reset();
+                    this.thirdFormGroup.reset();
+                },
+                error: (error) =>
+                    console.log('Error al crear el evento', error),
+            });
+        }
     }
 }

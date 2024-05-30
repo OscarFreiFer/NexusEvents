@@ -25,15 +25,15 @@
                 [matTooltipDisabled]="isDisabled"
                 class="btn"
                 mat-button
-                (click)="handleClick()"
+                (click)="handleClick(item.id)"
             >
                 Crea tu evento aquí
             </button>
         </mat-toolbar>
     </mat-card-header>
     <mat-card-content>
-        <mat-expansion-panel #panel>
-            <app-form-events></app-form-events>
+        <mat-expansion-panel #panel [expanded]="item.id == spaceId">
+            <app-form-events [spaceId]="spaceId"></app-form-events>
         </mat-expansion-panel>
     </mat-card-content>
 </mat-card>
@@ -44,6 +44,7 @@
     [pageSize]="pageSize"
     [pageSizeOptions]="[5, 7, 10, 15]"
     (page)="onPageChange($event)"
+    style="margin-bottom: 10rem"
 >
 </mat-paginator>
 } @else {
