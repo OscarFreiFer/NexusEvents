@@ -7,6 +7,7 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { SessionService } from '../../services/session.service';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { DrawerService } from '../../services/drawer.service';
+import { PanelService } from '../../services/panel.service';
 
 @Component({
     selector: 'app-header',
@@ -30,7 +31,8 @@ export class HeaderComponent implements OnInit {
     constructor(
         private router: Router,
         private sessionService: SessionService,
-        private drawerService: DrawerService
+        private drawerService: DrawerService,
+        private panelService: PanelService
     ) {}
 
     ngOnInit(): void {
@@ -45,6 +47,14 @@ export class HeaderComponent implements OnInit {
         if (option === 'logout') {
             this.sessionService.clearSession();
             this.isLogged = false;
+            if (this.router.url !== '/profile') {
+                this.panelService.togglePanel();
+            } else {
+                console.log(this.router.url);
+                this.router.navigate(['/login'], {
+                    queryParams: { returnUrl: this.router.url },
+                });
+            }
         } else {
             this.router.navigate([option], {
                 queryParams: { returnUrl: this.router.url },

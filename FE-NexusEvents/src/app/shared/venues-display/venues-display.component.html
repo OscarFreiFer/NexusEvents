@@ -32,7 +32,11 @@
         </mat-toolbar>
     </mat-card-header>
     <mat-card-content>
-        <mat-expansion-panel #panel [expanded]="item.id == spaceId">
+        <mat-expansion-panel
+            #panel
+            [expanded]="item.id == spaceId"
+            [hideToggle]="isDisabled"
+        >
             <app-form-events [spaceId]="spaceId"></app-form-events>
         </mat-expansion-panel>
     </mat-card-content>

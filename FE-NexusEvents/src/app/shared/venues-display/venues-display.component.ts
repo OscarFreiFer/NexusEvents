@@ -17,6 +17,7 @@ import {
 import { FormEventsComponent } from '../form-events/form-events.component';
 import { SessionService } from '../../services/session.service';
 import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
+import { PanelService } from '../../services/panel.service';
 
 @Component({
     selector: 'app-venues-display',
@@ -46,9 +47,12 @@ export class VenuesDisplayComponent implements OnInit {
     paginatedVenues: Venue[] = [];
     spaceId: number = 0;
 
+    @ViewChild('panel') panel!: MatExpansionPanel;
+
     constructor(
         private venueService: VenueService,
-        private sessionService: SessionService
+        private sessionService: SessionService,
+        private panelService: PanelService
     ) {}
 
     ngOnInit(): void {
@@ -61,6 +65,10 @@ export class VenuesDisplayComponent implements OnInit {
                 error: (error) => console.log('Error al obtener los espacios'),
             });
         }
+        this.panelService.togglePanel$.subscribe(() => this.panel.close());
+        if (this.sessionService.isLogged()) {
+            this.isDisabled = true;
+        }
         this.isLoading = false;
     }
 
@@ -68,6 +76,9 @@ export class VenuesDisplayComponent implements OnInit {
         if (this.sessionService.isLogged()) {
             this.spaceId = id;
             this.isDisabled = true;
+            this.panel.toggle();
+        } else {
+            this.isDisabled = false;
         }
     }
 

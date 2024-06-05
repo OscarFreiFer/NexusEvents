@@ -61,8 +61,6 @@ export class FormEventsComponent implements OnInit, OnChanges {
     disabledDates: Date[] = [];
     minDate: Date = new Date();
 
-    idName: string = 'fecha';
-
     firstFormGroup = this._formBuilder.group({
         firstCtrl: ['', Validators.required],
     });
@@ -89,7 +87,7 @@ export class FormEventsComponent implements OnInit, OnChanges {
         this.eventsService.getDateEvents(this.spaceId).subscribe({
             next: (data: any) => {
                 this.disabledDates = this.generateDisabledDates(data);
-                flatpickr('#' + this.idName + this.spaceId, {
+                flatpickr('#fecha' + this.spaceId, {
                     mode: 'range',
                     minDate: 'today',
                     dateFormat: 'm-d-y',

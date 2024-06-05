@@ -21,7 +21,7 @@
                         "assets": ["src/favicon.ico", "src/assets"],
                         "styles": [
                             "@angular/material/prebuilt-themes/indigo-pink.css",
-                            "node_modules/flatpickr/dist/themes/material_orange.css",
+                            "node_modules/flatpickr/dist/themes/airbnb.css",
                             "node_modules/flatpickr/dist/flatpickr.min.css",
                             "src/styles.css"
                         ],

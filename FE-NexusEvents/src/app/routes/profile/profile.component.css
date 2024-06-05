@@ -1,4 +1,55 @@
 .example-card {
+    margin: 0 auto;
     max-width: 400px;
+    min-width: 400px;
     margin-bottom: 8px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1rem;
+    justify-content: center;
+    padding: 5rem;
+    align-content: stretch;
+}
+
+.title_slogan {
+    font-size: 2.75rem;
+    font-weight: 900;
+    letter-spacing: 0.5rem;
+    line-height: 1;
+    text-align: center;
+}
+
+.descriptionShown {
+    display: -webkit-box;
+    white-space: normal;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 6;
+}
+
+.descriptionHide {
+    display: -webkit-box;
+    white-space: normal;
+}
+
+.btn {
+    background-color: var(--thirdary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 0.2rem 1.25rem;
+    align-self: flex-end;
+}
+
+.card-content {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: -webkit-fill-available;
 }
