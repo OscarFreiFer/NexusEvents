@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
 
     onSubmit(loginForm: NgForm): void {
         if (loginForm.invalid) {
-            console.log(this.router);
             this.isValid = false;
             return;
         }

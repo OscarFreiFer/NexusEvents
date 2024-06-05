@@ -38,4 +38,11 @@ export class EventsService {
             .pipe(shareReplay());
         return response;
     }
+
+    deleteEvent(id: number): Observable<Events> {
+        let response = this.http
+            .delete<Events>(environment.apiURL + `/Events/${id}`)
+            .pipe(shareReplay());
+        return response;
+    }
 }

@@ -61,7 +61,7 @@ namespace BE_NexusEvents.Controllers
 
         // GET: api/Events/User/{userId}
         [HttpGet("User/{userId}")]
-        public async Task<ActionResult<IEnumerable<EventEntity>>> GetEventsByUserId(int userId)
+        public async Task<ActionResult<IEnumerable<FullEventEntity>>> GetEventsByUserId(int userId)
         {
             var events = await _context.Events
                 .Include(e => e.Space)

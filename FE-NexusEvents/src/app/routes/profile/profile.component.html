@@ -28,7 +28,7 @@
                     >
                     <img
                         mat-card-lg-image
-                        src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                        src="../../../assets/conference.JPG"
                     />
                 </mat-card-title-group>
             </mat-card-header>
@@ -45,15 +45,21 @@
                         {{ item.description }}
                     </p>
                 </div>
-                <button class="btn" (click)="toggleShow($index)">
-                    @if(!isShownMap[$index]) {
-                    <span>Show more...</span>
-                    <mat-icon [fontIcon]="'add'"></mat-icon>
-                    } @else {
-                    <span>Show less...</span>
-                    <mat-icon [fontIcon]="'remove'"></mat-icon>
-                    }
-                </button>
+                <div class="btn-content">
+                    <button class="btn" (click)="deleteEvent(item.id)">
+                        <mat-icon [fontIcon]="'delete'"></mat-icon>
+                        Borrar
+                    </button>
+                    <button class="btn" (click)="toggleShow($index)">
+                        @if(!isShownMap[$index]) {
+                        <span>Show more...</span>
+                        <mat-icon [fontIcon]="'add'"></mat-icon>
+                        } @else {
+                        <span>Show less...</span>
+                        <mat-icon [fontIcon]="'remove'"></mat-icon>
+                        }
+                    </button>
+                </div>
             </mat-card-content>
         </mat-card>
         }

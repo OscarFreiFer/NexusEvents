@@ -23,17 +23,30 @@ export class ProfileComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.loadData();
+    }
+
+    loadData() {
         let userId = this.sessionService.getUserId();
         this.eventsService.getUserEvents(userId).subscribe({
             next: (data: Events[]) => {
                 this.userEvents = data;
                 this.userEvents.forEach((event, index) => {
                     this.isShownMap[index] = false;
-                    console.log(this.isShownMap);
                 });
             },
             error: (err: any) =>
                 console.log('Error al obtener los eventos del usuario', err),
+        });
+    }
+
+    deleteEvent(id: any) {
+        this.eventsService.deleteEvent(id).subscribe({
+            next: () => {
+                this.loadData();
+            },
+            error: (err: any) =>
+                console.log('Error al eliminar el evento', err),
         });
     }
 

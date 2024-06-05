@@ -44,6 +44,7 @@
     border-radius: 20px;
     padding: 0.2rem 1.25rem;
     align-self: flex-end;
+    cursor: pointer;
 }
 
 .card-content {
@@ -52,4 +53,10 @@
     flex-direction: column;
     justify-content: space-between;
     height: -webkit-fill-available;
+}
+
+.btn-content {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
 }

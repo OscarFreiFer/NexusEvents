@@ -16,6 +16,11 @@ namespace BE_NexusEvents.Models.DTO
     {
         public int UserID { get; set; }
         public int SpaceID { get; set; }
+      
+    }
+
+    public class FullEventEntity : EventEntity
+    {
         public Space Space { get; set; }
     }
 }
