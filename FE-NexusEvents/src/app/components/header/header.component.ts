@@ -34,31 +34,32 @@ export class HeaderComponent implements OnInit {
         private drawerService: DrawerService,
         private panelService: PanelService
     ) {}
+    onHandleDrawer() {
+        this.drawerService.toggleDrawer();
+    }
 
     ngOnInit(): void {
         this.isLogged = this.sessionService.isLogged();
     }
 
-    onHandleDrawer() {
-        this.drawerService.toggleDrawer();
-    }
-
     handleClick(option: string) {
+        const regex = /\/profile/;
         if (option === 'logout') {
             this.sessionService.clearSession();
             this.isLogged = false;
-            if (this.router.url !== '/profile') {
+            if (!this.router.url.match(regex)) {
                 this.panelService.togglePanel();
             } else {
-                console.log(this.router.url);
                 this.router.navigate(['/login'], {
                     queryParams: { returnUrl: this.router.url },
                 });
             }
-        } else {
+        } else if (option === 'login') {
             this.router.navigate([option], {
                 queryParams: { returnUrl: this.router.url },
             });
+        } else {
+            this.router.navigate([option]);
         }
     }
 }

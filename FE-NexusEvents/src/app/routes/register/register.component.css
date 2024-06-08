@@ -49,6 +49,7 @@
     flex-direction: column;
     gap: 5rem;
     justify-content: center;
+    margin-top: -40px;
     margin-bottom: 20px;
 }
 
@@ -57,9 +58,10 @@
     font-size: 15rem;
     font-weight: 500;
     color: rgb(255, 255, 255);
-    padding-left: 10rem;
+    padding-left: 9rem;
     padding-bottom: 5rem;
     z-index: 100;
+
     letter-spacing: 2.5rem;
 }
 

@@ -46,7 +46,10 @@
                     </p>
                 </div>
                 <div class="btn-content">
-                    <button class="btn" (click)="deleteEvent(item.id)">
+                    <button
+                        class="btn"
+                        (click)="deleteEvent(item.id, item.name)"
+                    >
                         <mat-icon [fontIcon]="'delete'"></mat-icon>
                         Borrar
                     </button>

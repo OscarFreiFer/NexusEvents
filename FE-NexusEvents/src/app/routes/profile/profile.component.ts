@@ -5,6 +5,8 @@ import { Events } from '../../interfaces/events';
 import { SessionService } from '../../services/session.service';
 import { DatePipe, NgClass } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from '../../components/delete-dialog/delete-dialog.component';
 
 @Component({
     selector: 'app-profile',
@@ -19,7 +21,8 @@ export class ProfileComponent implements OnInit {
 
     constructor(
         private eventsService: EventsService,
-        private sessionService: SessionService
+        private sessionService: SessionService,
+        public deleteDialog: MatDialog
     ) {}
 
     ngOnInit(): void {
@@ -40,13 +43,23 @@ export class ProfileComponent implements OnInit {
         });
     }
 
-    deleteEvent(id: any) {
-        this.eventsService.deleteEvent(id).subscribe({
-            next: () => {
-                this.loadData();
+    deleteEvent(id: any, name: any) {
+        const dialogRef = this.deleteDialog.open(DeleteDialogComponent, {
+            width: '400px',
+            data: {
+                name: name,
             },
-            error: (err: any) =>
-                console.log('Error al eliminar el evento', err),
+        });
+        dialogRef.afterClosed().subscribe((action) => {
+            if (action === 'accept') {
+                this.eventsService.deleteEvent(id).subscribe({
+                    next: () => {
+                        this.loadData();
+                    },
+                    error: (err: any) =>
+                        console.log('Error al eliminar el evento', err),
+                });
+            }
         });
     }
 

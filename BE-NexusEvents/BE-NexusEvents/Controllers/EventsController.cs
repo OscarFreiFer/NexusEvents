@@ -119,8 +119,8 @@ namespace BE_NexusEvents.Controllers
                 var eventModel = new Event
                 {
                     Name = eventEntity.Name,
-                    StartDate = eventEntity.StartDate,
-                    EndDate = eventEntity.EndDate,
+                    StartDate = eventEntity.StartDate.AddDays(1),
+                    EndDate = eventEntity.EndDate.AddDays(1),
                     Description = eventEntity.Description,
                     UserID = eventEntity.UserID,
                     SpaceID = eventEntity.SpaceID,

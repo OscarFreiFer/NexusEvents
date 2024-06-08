@@ -31,6 +31,7 @@ import { DateEvents } from '../../interfaces/date-events';
 import { Events } from '../../interfaces/events';
 import { SessionService } from '../../services/session.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-form-events',
@@ -60,6 +61,7 @@ export class FormEventsComponent implements OnInit, OnChanges {
     @Input() spaceId: number = 0;
     disabledDates: Date[] = [];
     minDate: Date = new Date();
+    durationInSeconds: number = 5;
 
     firstFormGroup = this._formBuilder.group({
         firstCtrl: ['', Validators.required],
@@ -76,6 +78,7 @@ export class FormEventsComponent implements OnInit, OnChanges {
         private sessionService: SessionService,
         private _formBuilder: FormBuilder,
         private eventsService: EventsService,
+        private _snackBar: MatSnackBar,
         breakpointObserver: BreakpointObserver
     ) {
         this.stepperOrientation = breakpointObserver
@@ -149,6 +152,15 @@ export class FormEventsComponent implements OnInit, OnChanges {
                     this.firstFormGroup.reset();
                     this.secondFormGroup.reset();
                     this.thirdFormGroup.reset();
+                    if (eventCreated.name)
+                        this._snackBar.open(
+                            `Tu evento '${eventCreated.name}' se ha creado correctamente!`,
+                            'Cerrar',
+                            {
+                                duration: this.durationInSeconds * 1000,
+                                verticalPosition: 'top',
+                            }
+                        );
                 },
                 error: (error) =>
                     console.log('Error al crear el evento', error),

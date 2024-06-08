@@ -14,16 +14,16 @@
             </button>
             <mat-menu #menu="matMenu">
                 @if (!isLogged) {
-                <button mat-menu-item (click)="handleClick('/login')">
+                <button mat-menu-item (click)="handleClick('login')">
                     <mat-icon fontIcon="login" />
                     <span>Log in</span>
                 </button>
-                <button mat-menu-item (click)="handleClick('/register')">
+                <button mat-menu-item (click)="handleClick('register')">
                     <mat-icon fontIcon="person_add" />
                     <span>Sign up</span>
                 </button>
                 }@else {
-                <button mat-menu-item (click)="handleClick('/profile')">
+                <button mat-menu-item (click)="handleClick('profile')">
                     <mat-icon fontIcon="person" />
                     <span>Perfil</span>
                 </button>

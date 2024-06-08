@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
                 );
             },
             error: (err: any) => {
+                this.isValid = false;
                 console.log(err);
             },
         });

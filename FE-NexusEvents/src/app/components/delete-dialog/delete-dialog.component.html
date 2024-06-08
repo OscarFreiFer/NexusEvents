@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Borrar evento</h2>
+<mat-dialog-content>
+    <div>¿Estás seguro de borrar el evento '{{ data.name }}'?</div>
+    <div>Se eliminará la reserva asociada.</div></mat-dialog-content
+>
+<mat-dialog-actions style="display: flex; justify-content: space-between">
+    <button
+        mat-button
+        mat-dialog-close
+        (click)="onClose()"
+        class="btn-secondary"
+    >
+        Cancelar
+    </button>
+    <button
+        mat-button
+        mat-dialog-close
+        cdkFocusInitial
+        (click)="onAccept()"
+        class="btn"
+    >
+        Aceptar
+    </button>
+</mat-dialog-actions>
